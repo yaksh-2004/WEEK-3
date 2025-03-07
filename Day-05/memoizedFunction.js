@@ -27,7 +27,7 @@ console.log("You Can Choose One Function From Sum,Fibonacci,Factorial!!");
 console.log("You Can Enter Your Actions by Differenciating with Comma");
 console.log("You Can Enter values by Differenciating with Comma");
 
-// FunctionName selection ..
+// Function selection ..
 rl.question('Enter One Function From sum,fibonacci,factorial : ', function(func) {
     const options = { 
                      sum: sum, 
@@ -46,10 +46,11 @@ rl.question('Enter One Function From sum,fibonacci,factorial : ', function(func)
         let ans = [];
         let listOfArguments = [];
 
-        // Take inputs for "call" actions..
+        // Take inputs for call actions..
         function getValues(indexOfElement) {
             if (indexOfElement >= possibleActions.length) {
-                performActions(); // Perform all actions after getting inputs..
+                 // Perform all actions after getting inputs..
+                performActions();
                 return;
             }
 
@@ -64,11 +65,12 @@ rl.question('Enter One Function From sum,fibonacci,factorial : ', function(func)
                     listOfArguments.push(argumentArray);
                     getValues(indexOfElement + 1);
                 });
-            } 
-            
+            } else {
+                getValues(indexOfElement + 1);
+            }
         }
         function memoize(fn) {
-            // Stores Founded answer in cache..
+            // Stores alreadyFounded answer in cache..
             const cache = {}; 
             //Used to Check whether Call hasbeen made before or not..
             let callCount = 0;
@@ -84,7 +86,7 @@ rl.question('Enter One Function From sum,fibonacci,factorial : ', function(func)
                     
                     if (cache.hasOwnProperty(key)) {
                         // Return cached result
-                        return cache[key]; 
+                        return cache[key];
                     } else {
                         // Compute result
                         let result = fn.apply(null, arguments); 
@@ -117,8 +119,9 @@ rl.question('Enter One Function From sum,fibonacci,factorial : ', function(func)
 
             console.log('Answer is :', ans);
             rl.close();
-        }  
-          let indexOfElement=0;
-          getValues(indexOfElement);
+        }
+        
+  let indexOfElement=0;
+        getValues(indexOfElement);
     });
 });
